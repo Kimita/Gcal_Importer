@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AndroICS</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- for TopActivity -->
+    <string name="top_menu_get_from_google">Get from Google</string>
+    <string name="top_menu_filepicker">File Picker</string>
+    <string name="top_label_get_from_google">from google</string>
+    <string name="top_label_load_button">Load</string>
+    <string name="top_async_progress_message">Now making ListView. . .</string>
+    <string name="top_tv_info1">1st) Get iCalendar data.\n  (Run command in the menu button)</string>
+    <string name="top_tv_info1_1">If you are already obtained the data in this application, Try to Tap the Load button.</string>
+    <string name="top_tv_info2">2nd) Choice Calendar from ListView at below and tap Next button.</string>
+    <string name="top_label_next_button">Next</string>
+    <string name="top_listview_title_date">Obtained Date</string>
+    <string name="top_listview_title_name">Calendar Name</string>
+    <string name="top_listview_value_unknown">unknown</string>
+    <string name="top_toast_download_comp">Download Completed.</string>
+    <string name="top_toast_download_failuer">Oops! Download Failure.</string>
+    <string name="top_toast_extract_success">Extract Success!</string>
+    <string name="top_toast_extract_failuer">Oops! Extract Failure.</string>
+    <string name="top_toast_under_management">Already under management the file.\nNothing to do.</string>
+    <string name="top_toast_picker_badchoice">Error! Bad Choice.\nchosen File: </string>
+    <string name="top_toast_load_no_files">There is No ICS files.\n(First, Run command in the menu button)</string>
+
+    <!-- for BrowserForDownload -->
+    <string name="title_activity_browser_for_down_load">BrowserForDownLoad</string>
+    <string name="browser_reload_btn">Reload</string>
+    <string name="browser_finish_btn">Go Back</string>
+    <string name="browser_toast">Please enter an existing account.</string>
+
+    <!-- for SimpleFileDialog -->
+	<string name="filechooser_button1">File Open</string>
+	<string name="filechooser_button2">File Save</string>
+	<string name="filechooser_button3">Folder Choose</string>
+
+    <!-- for ShowEventListActivity -->
+    <string name="title_activity_show_event_list">ShowEventListActivity</string>
+    <string name="showeventlist_notset">Not set</string>
+    <string name="showeventlist_trtitle_filename">File Name</string>
+    <string name="showeventlist_trtitle_calid">Calendar ID</string>
+    <string name="showeventlist_trtitle_prodid">PRODID</string>
+    <string name="showeventlist_trtitle_version">VERSION</string>
+    <string name="showeventlist_trtitle_calscale">CALSCALE</string>
+    <string name="showeventlist_trtitle_method">METHOD</string>
+    <string name="showeventlist_trtitle_calname">CALNDAR NAME</string>
+    <string name="showeventlist_trtitle_timezone">TIMEZONE</string>
+    <string name="showeventlist_trtitle_caldesc">DESCRIPTION</string>
+
+    <string name="showeventlist_dialog_spinner">in progress . . .</string>
+    <string name="showeventlist_dt_hyphen">" - "</string>
+    <string name="showeventlist_bt_selectdialog">Choice target</string>
+    <string name="showeventlist_choicedialog_first">First, you must create a new calendar.</string>
+    <string name="showeventlist_dialog_choice_calendar_to_import">Choice target Calendar(Local)</string>
+    <string name="showeventlist_bt_query">Run Import</string>
+    <string name="showeventlist_bt_test">Run Test</string>
+    <string name="showeventlist_listdialog_nothing">Target Calendar Not set.</string>
+    <string name="showeventlist_new_calendar_created">new Calendar created.</string>
+    <string name="showeventlist_done_calendar_delete">The following Calendar has been deleted.</string>
+    <string name="showeventlist_nothing_for_insert">Nothing for insert.</string>
+    <string name="showeventlist_import_now">Import now.\nPlease show and check your calendar application.</string>
+    <string name="showeventlist_tv_exist_ics">ICS data:</string>
+    <string name="showeventlist_tv_exist_local">Both data:</string>
+    <string name="showeventlist_tv_exist_ics_only">ICS Only:</string>
+
+	<string name="showeventlist_menu_del_calendar">Delete calendar</string>
+	<string name="showeventlist_menu_create_new_calendar">Create new calendar</string>
+
+</resources>

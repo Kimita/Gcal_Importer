@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">AndroICS</string>
+    <string name="action_settings">設定</string>
+    <string name="hello_world">Hello world!</string>
+
+    <!-- for TopActivity -->
+    <string name="top_menu_get_from_google">Googleから取得</string>
+    <string name="top_menu_filepicker">File Picker</string>
+    <string name="top_label_get_from_google">Googleから取得</string>
+    <string name="top_label_load_button">読み込む</string>
+    <string name="top_async_progress_message">取得したデータのリストを作成中</string>
+    <string name="top_tv_info1">1) iCalendarデータをアプリ内に取得する.\n　(メニューから実行)</string>
+    <string name="top_tv_info1_1">アプリ内にデータを取得済みの場合は, [読み込む]ボタンをタップ</string>
+    <string name="top_tv_info2">2) 表示されたListViewから選択して[次へ]ボタンをタップ</string>
+    <string name="top_label_next_button">次へ</string>
+    <string name="top_listview_title_date">取得日</string>
+    <string name="top_listview_title_name">カレンダー名</string>
+    <string name="top_listview_value_unknown">読み込んで下さい</string>
+    <string name="top_toast_download_comp">ダウンロード完了</string>
+    <string name="top_toast_download_failuer">失敗: ダウンロードできませんでした</string>
+    <string name="top_toast_extract_success">Zipファイル展開成功</string>
+    <string name="top_toast_extract_failuer">失敗: Zipファイルを展開できませんでした</string>
+    <string name="top_toast_under_management">選択されたファイルはアプリに取り込み済みです</string>
+    <string name="top_toast_picker_badchoice">本アプリで取り扱えないファイルです\n選択されたファイル: </string>
+    <string name="top_toast_load_no_files">iCalednarデータがアプリ内にありません\n(まずはメニューから取得実行)</string>
+
+    <!-- for BrowserForDownload -->
+    <string name="title_activity_browser_for_down_load">BrowserForDownLoad</string>
+    <string name="browser_reload_btn">Reload</string>
+    <string name="browser_finish_btn">Go Back</string>
+    <string name="browser_toast">既にお持ちのアカウントをお使い下さい。</string>
+
+    <!-- for SimpleFileDialog -->
+	<string name="filechooser_button1">File Open</string>
+	<string name="filechooser_button2">File Save</string>
+	<string name="filechooser_button3">Folder Choose</string>
+
+    <!-- for ShowEventListActivity -->
+    <string name="title_activity_show_event_list">ShowEventListActivity</string>
+    <string name="showeventlist_notset">Not set</string>
+    <string name="showeventlist_trtitle_filename">File Name</string>
+    <string name="showeventlist_trtitle_calid">Calendar ID</string>
+    <string name="showeventlist_trtitle_prodid">PRODID</string>
+    <string name="showeventlist_trtitle_version">VERSION</string>
+    <string name="showeventlist_trtitle_calscale">CALSCALE</string>
+    <string name="showeventlist_trtitle_method">METHOD</string>
+    <string name="showeventlist_trtitle_calname">表示タイトル</string>
+    <string name="showeventlist_trtitle_timezone">Time Zone</string>
+    <string name="showeventlist_trtitle_caldesc">説明</string>
+
+    <string name="showeventlist_dialog_spinner">処理中 . . .</string>
+    <string name="showeventlist_dt_hyphen">" - "</string>
+    <string name="showeventlist_bt_selectdialog">Import先を選択</string>
+    <string name="showeventlist_choicedialog_first">まず,　Import先カレンダーをMenuから作成して下さい</string>
+    <string name="showeventlist_dialog_choice_calendar_to_import">Import先カレンダーを選択</string>
+    <string name="showeventlist_bt_query">Import開始</string>
+    <string name="showeventlist_bt_test">Run Test</string>
+    <string name="showeventlist_listdialog_nothing">Import先が決まっていません</string>
+    <string name="showeventlist_new_calendar_created">新規カレンダーが作成されました</string>
+    <string name="showeventlist_done_calendar_delete">以下のカレンダーが削除されました</string>
+    <string name="showeventlist_nothing_for_insert">取り込むべきイベントがありません</string>
+    <string name="showeventlist_import_now">Importしています\n普段使っているカレンダーアプリで結果を確認して下さい</string>
+    <string name="showeventlist_tv_exist_ics">ICS data :</string>
+    <string name="showeventlist_tv_exist_local">Both data:</string>
+    <string name="showeventlist_tv_exist_ics_only">ICS Only :</string>
+
+	<string name="showeventlist_menu_del_calendar">削除するカレンダーを選択</string>
+	<string name="showeventlist_menu_create_new_calendar">import先を新規作成</string>
+
+</resources>

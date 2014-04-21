@@ -1,0 +1,282 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/showeventlist_linearlayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    tools:context=".ShowEventListActivity" >
+
+    <!-- tables (title : value) -->
+	<RelativeLayout
+	    android:id="@+id/showeventlist_relativelayout"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content">
+
+		<TextView
+			android:id="@+id/showeventlist_trtitle_calid"
+			style="@style/ShowEventListHeaderTitle"
+			android:layout_alignParentLeft="true"
+			android:text="@string/showeventlist_trtitle_filename"
+		/>
+	    <HorizontalScrollView
+			android:id="@+id/showeventlist_hs_calid"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/showeventlist_trtitle_calid">
+        	<TextView
+				android:id="@+id/showeventlist_detail_calid"
+				style="@style/ShowEventListHeaderValue"
+			/>
+	    </HorizontalScrollView>
+
+
+		<TextView
+			android:id="@+id/showeventlist_trtitle_prodid"
+			style="@style/ShowEventListHeaderTitle"
+			android:text="@string/showeventlist_trtitle_prodid"
+			android:layout_below="@id/showeventlist_trtitle_calid"
+		/>
+	    <HorizontalScrollView
+			android:id="@+id/showeventlist_hs_prodid"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/showeventlist_trtitle_prodid"
+			android:layout_below="@id/showeventlist_hs_calid"
+			>
+			<TextView
+				android:id="@+id/showeventlist_detail_prodid"
+				style="@style/ShowEventListHeaderValue"
+			/>
+		</HorizontalScrollView>
+
+
+		<TextView
+			android:id="@+id/showeventlist_trtitle_version"
+			style="@style/ShowEventListHeaderTitle"
+			android:text="@string/showeventlist_trtitle_version"
+			android:layout_below="@id/showeventlist_trtitle_prodid"
+		/>
+	    <HorizontalScrollView
+			android:id="@+id/showeventlist_hs_version"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/showeventlist_trtitle_version"
+			android:layout_below="@id/showeventlist_hs_prodid"
+			>
+			<TextView
+				android:id="@+id/showeventlist_detail_version"
+				style="@style/ShowEventListHeaderValue"
+			/>
+		</HorizontalScrollView>
+
+
+		<TextView
+			android:id="@+id/showeventlist_trtitle_calscale"
+			style="@style/ShowEventListHeaderTitle"
+			android:text="@string/showeventlist_trtitle_calscale"
+			android:layout_below="@id/showeventlist_trtitle_version"
+		/>
+	    <HorizontalScrollView
+			android:id="@+id/showeventlist_hs_calscale"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/showeventlist_trtitle_calscale"
+			android:layout_below="@id/showeventlist_hs_version"
+			>
+			<TextView
+				android:id="@+id/showeventlist_detail_calscale"
+				style="@style/ShowEventListHeaderValue"
+			/>
+		</HorizontalScrollView>
+
+
+		<TextView
+			android:id="@+id/showeventlist_trtitle_method"
+			style="@style/ShowEventListHeaderTitle"
+			android:text="@string/showeventlist_trtitle_method"
+			android:layout_below="@id/showeventlist_trtitle_calscale"
+		/>
+	    <HorizontalScrollView
+			android:id="@+id/showeventlist_hs_method"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/showeventlist_trtitle_method"
+			android:layout_below="@id/showeventlist_hs_calscale"
+			>
+			<TextView
+				android:id="@+id/showeventlist_detail_method"
+				style="@style/ShowEventListHeaderValue"
+			/>
+		</HorizontalScrollView>
+
+
+		<TextView
+			android:id="@+id/showeventlist_trtitle_calname"
+			style="@style/ShowEventListHeaderTitle"
+			android:text="@string/showeventlist_trtitle_calname"
+			android:layout_below="@id/showeventlist_trtitle_method"
+		/>
+	    <HorizontalScrollView
+			android:id="@+id/showeventlist_hs_calname"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/showeventlist_trtitle_calname"
+			android:layout_below="@id/showeventlist_hs_method"
+			>
+			<TextView
+				android:id="@+id/showeventlist_detail_calname"
+				style="@style/ShowEventListHeaderValue"
+			/>
+		</HorizontalScrollView>
+
+
+		<TextView
+			android:id="@+id/showeventlist_trtitle_timezone"
+			style="@style/ShowEventListHeaderTitle"
+			android:text="@string/showeventlist_trtitle_timezone"
+			android:layout_below="@id/showeventlist_trtitle_calname"
+		/>
+	    <HorizontalScrollView
+			android:id="@+id/showeventlist_hs_timezone"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/showeventlist_trtitle_timezone"
+			android:layout_below="@id/showeventlist_hs_calname"
+			>
+			<TextView
+				android:id="@+id/showeventlist_detail_timezone"
+				style="@style/ShowEventListHeaderValue"
+			/>
+		</HorizontalScrollView>
+
+
+		<TextView
+			android:id="@+id/showeventlist_trtitle_caldesc"
+			style="@style/ShowEventListHeaderTitle"
+			android:text="@string/showeventlist_trtitle_caldesc"
+			android:layout_below="@id/showeventlist_trtitle_timezone"
+		/>
+	    <HorizontalScrollView
+			android:id="@+id/showeventlist_hs_caldesc"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_toRightOf="@id/showeventlist_trtitle_caldesc"
+			android:layout_below="@id/showeventlist_trtitle_timezone"
+			>
+			<TextView
+				android:id="@+id/showeventlist_detail_caldesc"
+				style="@style/ShowEventListHeaderValue"
+			/>
+		</HorizontalScrollView>
+
+
+	</RelativeLayout>
+
+    <TextView
+        android:id="@+id/showeventlist_border1"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#888888"
+        />
+
+    <!-- Panel -->
+	<RelativeLayout
+	    android:id="@+id/showeventlist_relative_panel"
+	    android:layout_width="match_parent"
+	    android:layout_height="wrap_content">
+
+	    <Button
+	        android:id="@+id/showeventlist_bt_selectdialog"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentTop="true"
+	        android:layout_alignParentRight="true"
+	        android:text="@string/showeventlist_bt_selectdialog"
+	        />
+
+		<Button
+	        android:id="@+id/showeventlist_bt_run_import"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:layout_alignParentRight="true"
+	        android:layout_below="@id/showeventlist_bt_selectdialog"
+	        android:text="@string/showeventlist_bt_query"
+	        />
+
+	    <TextView
+	        android:id="@+id/showeventlist_tv_panel_dummy"
+	        android:layout_width="0dp"
+	        android:layout_height="0dp"
+	        android:layout_alignParentLeft="true"
+	        android:layout_toLeftOf="@id/showeventlist_bt_selectdialog"
+	        />
+
+	    <TextView
+	        android:id="@+id/showeventlist_tv_exist_ics"
+            style="@style/ShowEventListCountView"
+	        android:layout_below="@id/showeventlist_tv_panel_dummy"
+	        android:text="@string/showeventlist_tv_exist_ics"
+	        />
+	    <TextView
+	        android:id="@+id/showeventlist_tv_exist_ics_num"
+            style="@style/ShowEventListCountView"
+	        android:layout_toRightOf="@id/showeventlist_tv_exist_ics"
+	        />
+
+	    <TextView
+	        android:id="@+id/showeventlist_tv_exist_local"
+            style="@style/ShowEventListCountView"
+	        android:layout_below="@id/showeventlist_tv_exist_ics"
+	        android:text="@string/showeventlist_tv_exist_local"
+	        />
+	    <TextView
+	        android:id="@+id/showeventlist_tv_exist_local_num"
+            style="@style/ShowEventListCountView"
+	        android:layout_below="@id/showeventlist_tv_exist_ics"
+	        android:layout_toRightOf="@id/showeventlist_tv_exist_local"
+	        />
+
+	    <TextView
+	        android:id="@+id/showeventlist_tv_exist_ics_only"
+            style="@style/ShowEventListCountView"
+	        android:layout_below="@id/showeventlist_tv_exist_local"
+	        android:text="@string/showeventlist_tv_exist_ics_only"
+	        />
+	    <TextView
+	        android:id="@+id/showeventlist_tv_exist_ics_only_num"
+            style="@style/ShowEventListCountView"
+	        android:layout_below="@id/showeventlist_tv_exist_local"
+	        android:layout_toRightOf="@id/showeventlist_tv_exist_ics_only"
+	        />
+
+
+
+	</RelativeLayout>
+
+    <TextView
+        android:id="@+id/showeventlist_border2"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#888888"
+        />
+
+    <!-- event list -->
+    <LinearLayout
+        android:id="@+id/showeventlist_listviewcontainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="10dp"
+	    android:orientation="vertical"
+        >
+	    <ListView
+	        android:id="@+id/showeventlist_listView"
+	        android:layout_width="match_parent"
+	        android:layout_height="match_parent"
+	        />
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item type="id" name="lv_tvNull" />
+    <item type="id" name="lv_tv1" />
+    <item type="id" name="lv_tv2" />
+    <item type="id" name="lv_tv3" />
+    <item type="id" name="tv_bottom" />
+
+    <item type="id" name="showeventlist_trtitle_calid" />
+    <item type="id" name="showeventlist_trtitle_prodid" />
+    <item type="id" name="showeventlist_trtitle_version" />
+    <item type="id" name="showeventlist_trtitle_calscale" />
+    <item type="id" name="showeventlist_trtitle_method" />
+    <item type="id" name="showeventlist_trtitle_calname" />
+    <item type="id" name="showeventlist_trtitle_timezone" />
+    <item type="id" name="showeventlist_trtitle_caldesc" />
+
+    <item type="id" name="showeventlist_values_calid" />
+    <item type="id" name="showeventlist_values_prodid" />
+    <item type="id" name="showeventlist_values_version" />
+    <item type="id" name="showeventlist_values_calscale" />
+    <item type="id" name="showeventlist_values_method" />
+    <item type="id" name="showeventlist_values_calname" />
+    <item type="id" name="showeventlist_values_timezone" />
+    <item type="id" name="showeventlist_values_caldesc" />
+
+</resources>

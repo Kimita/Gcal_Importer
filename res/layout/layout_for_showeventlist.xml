@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_for_showeventlist"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+    <TextView
+        android:id="@+id/showeventlist_dtstart"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/showeventlist_notset"
+        />
+    <TextView
+        android:id="@+id/showeventlist_dt_hyphen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/showeventlist_dt_hyphen"
+        android:layout_toRightOf="@id/showeventlist_dtstart"
+        />
+    <TextView
+        android:id="@+id/showeventlist_dtend"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/showeventlist_notset"
+        android:layout_toRightOf="@id/showeventlist_dt_hyphen"
+        />
+
+    <TextView
+        android:id="@+id/showeventlist_summary"
+        style="@style/ShowEventListSummaryValue"
+        android:text="@string/showeventlist_notset"
+        android:layout_below="@id/showeventlist_dtstart"
+        />
+
+    <TextView
+        android:id="@+id/showeventlist_location"
+        style="@style/ShowEventListLocationValue"
+        android:text="@string/showeventlist_notset"
+        android:layout_below="@id/showeventlist_summary"
+        />
+
+</RelativeLayout>
