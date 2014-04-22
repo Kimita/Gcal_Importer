@@ -65,20 +65,15 @@ public class ZipInOutMethods {
 		String targetPath = pathToOutputDir + fname;
 		File targetFile = new File(targetPath);
 		boolean res = false;
-		Log.v(TAG, "Extract target - " + targetPath);
 
 	    ZipInputStream zipIn = null;
 	    BufferedOutputStream buffOutStream = null;
 	    ZipEntry zipEntry = null;
 	    int writeLength = 0;
 	    try {
-    		Log.v(TAG, "Open ZipInputStream.");
 	    	zipIn = new ZipInputStream(new FileInputStream(targetFile));
-    		Log.v(TAG, "zipIn: " + zipIn.toString());
 	    	while ((zipEntry = zipIn.getNextEntry()) != null) {
-	    		Log.v(TAG, "Entry opend.");
 	    		buffOutStream = new BufferedOutputStream(new FileOutputStream(pathToExtractDir + zipEntry.getName()));
-	    		Log.v(TAG, "pathToExtract: " + pathToExtractDir + " - " + " zipEntry.getName(): " + zipEntry.getName());
 	    		byte[] buff1Kb = new byte[1024];
 	    		while ((writeLength = zipIn.read(buff1Kb)) != -1) {
 	    			buffOutStream.write(buff1Kb, 0, writeLength);
@@ -86,12 +81,10 @@ public class ZipInOutMethods {
 	    		zipIn.closeEntry();
 	    		buffOutStream.close();
 	    		buffOutStream = null;
-	    		Log.v(TAG, "Entry extracted.");
 	    	}
 	    	zipIn.close();
     		res = true;
-    		Log.v(TAG, "Close ZipInputStream.");
-    		if(targetFile.delete())	Log.v(TAG, "File Deleted: " + targetPath);
+    		if(targetFile.delete())	Log.v(TAG, "File Deleted.");
 	    } catch (FileNotFoundException e) {
 			Log.e(TAG, "Open Error: [File:" + targetPath + "]");
 	        e.printStackTrace();

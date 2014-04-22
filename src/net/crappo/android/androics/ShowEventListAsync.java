@@ -5,7 +5,6 @@ import java.util.TimeZone;
 import net.fortuna.ical4j.model.Component;
 import net.fortuna.ical4j.model.Property;
 import android.os.AsyncTask;
-import android.util.Log;
 
 public class ShowEventListAsync extends AsyncTask<String, Void, Void>{
 	Model4EventList model;
@@ -32,17 +31,14 @@ public class ShowEventListAsync extends AsyncTask<String, Void, Void>{
 			Object obj = model.calendar.getComponents("VTIMEZONE").get(0);
 			if(obj instanceof Component) {
 				model.timezone = TimeZone.getTimeZone(((Component)obj).getProperty(Property.TZID).getValue());
-				Log.v("doInBackground(VTIMEZONE)","TimeZone:" + model.timezone.getID() + "(" + model.timezone.getRawOffset() + ")" );
 			}
 		} else { // TimeZoneがVCALENDARのPropertyの一つ(?)として定義されている場合
 			for(Object tmpObj: model.calendar.getProperties()) {
 				Object obj = ((Property)tmpObj).getValue();
 				if(obj instanceof TimeZone) {
 					model.timezone = (TimeZone)obj;
-					Log.v("doInBackground(getProperties)","TimeZone:" + model.timezone.getID() + "(" + model.timezone.getRawOffset() + ")" );
 				} else if ( ((Property)tmpObj).getName().equals("X-WR-TIMEZONE") ){
 					model.timezone = TimeZone.getTimeZone(((Property)tmpObj).getValue());
-					Log.v("doInBackground(getProperties)","TimeZone:" + model.timezone.getID() + "(" + model.timezone.getRawOffset() + ")");
 				}
 			}
 		}

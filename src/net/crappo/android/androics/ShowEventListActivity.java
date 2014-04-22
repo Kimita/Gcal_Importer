@@ -53,7 +53,6 @@ public class ShowEventListActivity extends Activity {
 	private RelativeLayout rl;
 	private ListView lv;
     private String icsFileName;      // import元ICSファイルのファイル名(TopActivityからのintentで受け取る)
-    private String localTargetCalId; // カレンダーID(Google Calendarでは、ICSファイルの拡張子を除いたファイル名と同一)
 	private ArrayList<CalendarDto> localCalDtoList = new ArrayList<CalendarDto>(); // 本アプリ用AccountTypeに属するカレンダーのリスト
 	private int localTargetCal_ChosenPosition = CLEARED_CHOICE; // ダイアログで選択されたimport先ローカルカレンダーのposition
 	private int icsExist = 0;    // ICSファイルが持っているEventデータの個数 (Panel部分に表示される)
@@ -99,7 +98,6 @@ public class ShowEventListActivity extends Activity {
         runImportBtn.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
-            	Log.v("showeventlist_bt_query", "localCalDtoList.size():" + localCalDtoList.size());
             	if(icsOnly == 0) { // 見ているICSファイルのイベントデータが全て端末ローカルカレンダーに登録済みの場合、何も処理しない。
 	        		Toast.makeText(activityObj, R.string.showeventlist_nothing_for_insert, Toast.LENGTH_LONG).show();
             	} else if(localTargetCal_ChosenPosition != CLEARED_CHOICE) { // 上記をクリアしてImpor先が選択されている場合
@@ -112,7 +110,6 @@ public class ShowEventListActivity extends Activity {
 						, Color.rgb(0, 0, 0) // 色はとりあえず真っ黒を指定
 						, model.timezone.getID());
 					// 上記で作成が完了したカレンダーをすぐ選択状態にしてinsert実行
-					localTargetCalId = localCalDtoList.get(localTargetCal_ChosenPosition).getOwnerAccount();
                 	queryClass.insertEvents();
 	        		Toast.makeText(activityObj, R.string.showeventlist_import_now, Toast.LENGTH_LONG).show();
             	}
@@ -153,11 +150,9 @@ public class ShowEventListActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-	  Log.i("onOptionsItemSelected","onOptionsItemSelected here.");
       switch (item.getItemId()) {
       case R.id.showeventlist_menu_create_new_calendar:
           // 本アプリ用カレンダーを作成する(作成処理はqueryClass.createNewCalendar()メソッドで行う)
-	      Log.v("onOptionsItemSelected", "Calendar create selected.");
 	      localTargetCal_ChosenPosition = queryClass.createNewCalendar(
     		    model.calendar.getProperties().getProperty("X-WR-CALNAME").getValue() + "_" + new SimpleDateFormat("yyyyMMdd_HHmmss", locale).format(new Date())
     		  , model.calendar.getProperties().getProperty("X-WR-CALNAME").getValue()
@@ -216,7 +211,6 @@ public class ShowEventListActivity extends Activity {
 			Property p = (Property)propList.get(i);
 			headerTitles.add(p.getName());
 		}
-		Log.v("makeHeader", "array.size(): " + headerTitles.size());
 		boolean[] showSetting = new boolean[] { // 各項目について、表示するかしないか(true/false)をこの配列で決めておく
 				  true	// Calendar FileName
 				, false	// propList.getProperty("PRODID").getValue()
@@ -253,7 +247,6 @@ public class ShowEventListActivity extends Activity {
 
     /* ローカルカレンダーの選択状態をクリアするメソッド */
 	private void clearChoice() {
-		localTargetCalId = null;
 		localTargetCal_ChosenPosition = CLEARED_CHOICE;
 		localCalDtoList.clear();
 	}
@@ -310,7 +303,6 @@ public class ShowEventListActivity extends Activity {
 	 *  対象カレンダー選択リストをDialogで表示
 	 */
 	private void showSingleSelectDialog(int stringId) {
-        Log.v("showSingleSelectDialog", "Start: Calendar select dialog");
         if(localCalDtoList.size() == 0) { // 本アプリ用カレンダーが未作成の場合は「まずは作ってくれ」とToast表示する
         	Toast.makeText(this, R.string.showeventlist_choicedialog_first, Toast.LENGTH_LONG).show();
         } else {
@@ -330,14 +322,12 @@ public class ShowEventListActivity extends Activity {
     					@Override
     					public void onClick(DialogInterface dialog, int whichButton) {
     						localTargetCal_ChosenPosition = whichButton;
-    				        Log.v("showSingleSelectDialog", "localTargetCal_ChosenPosition prepared.(" + localTargetCal_ChosenPosition + ")");
     					}
     				}
     			);
     		
     		// dialogのタイトルを設定
     		final String dialogTitle = resources.getString(stringId);
-            Log.v("showSingleSelectDialog", "Dialog Title: " + dialogTitle);
     		dialog.setTitle(dialogTitle);
 		
 			dialog.setPositiveButton( // OKボタンだけ作る(キャンセルボタンは要らない)
@@ -347,8 +337,6 @@ public class ShowEventListActivity extends Activity {
 					public void onClick(DialogInterface dialog, int whichButton) {
 						// なにも選択されていない状態でOKされたら、デフォルトの値が選択されている状態にする
 						if(localTargetCal_ChosenPosition == CLEARED_CHOICE)	localTargetCal_ChosenPosition = DEFAULT_CHECKED;
-						localTargetCalId = localCalDtoList.get(localTargetCal_ChosenPosition).getOwnerAccount();
-						Log.v("showSingleSelectDialog", localTargetCalId + " is chosen.");
 						// [Import先を選択]ボタンから来る場合と、Menuの[カレンダー削除]から来る場合とがありうる。タイトル文字のidで判定する。
 						if(dialogTitle.equals(resources.getString(R.string.showeventlist_menu_del_calendar)))
 							queryClass.delCalendar(); // [カレンダー削除]の場合だけ、左記を実行する
@@ -424,20 +412,28 @@ public class ShowEventListActivity extends Activity {
 				String str;
 	    		switch(entry.getId()){
 	    		case R.id.showeventlist_dtstart: // getTime()でUnixTimeStampにするのがミソだと思っている
-					str = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", locale).format(getDateTime(event.getStartDate().getValue()).getTime());
-	    			entry.setText(str);
+	    			if(event.getStartDate() != null){
+						str = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", locale).format(getDateTime(event.getStartDate().getValue()).getTime());
+		    			entry.setText(str);
+	    			} else { entry.setText(""); }
 	    			break;
 	    		case R.id.showeventlist_dtend: // getTime()でUnixTimeStampにするのがミソだと思っている
-					str = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", locale).format(getDateTime(event.getEndDate().getValue()).getTime());
-	    			entry.setText(str);
+	    			if(event.getEndDate() != null){
+						str = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss", locale).format(getDateTime(event.getEndDate().getValue()).getTime());
+		    			entry.setText(str);
+	    			} else { entry.setText(""); }
 	    			break;
 	    		case R.id.showeventlist_summary: // eventのタイトル
-					str = event.getProperties().getProperty(Property.SUMMARY).getValue();
-	    			entry.setText(str);
+	    			if(event.getProperties().getProperty(Property.SUMMARY) != null) {
+							str = event.getProperties().getProperty(Property.SUMMARY).getValue();
+			    			entry.setText(str);
+		    		} else { entry.setText(""); }
 	    			break;
 	    		case R.id.showeventlist_location: // eventの場所
-					str = event.getProperties().getProperty(Property.LOCATION).getValue();
-	    			entry.setText(str);
+	    			if(event.getProperties().getProperty(Property.LOCATION) != null){
+						str = event.getProperties().getProperty(Property.LOCATION).getValue();
+		    			entry.setText(str);
+	    			} else { entry.setText(""); }
 	    			break;
 	    		}
         	} else {
@@ -484,9 +480,6 @@ public class ShowEventListActivity extends Activity {
 		    	    	calDto.setAccount_name(c.getString(c.getColumnIndex("_sync_account")));
 		    	    	calDto.setCalendar_displayName(c.getString(c.getColumnIndex("displayName")));
 	    	    	}
-//	    	    	for(int i=0;i<c.getColumnCount();i++) {
-//                		Log.v("getCalendars", "(" + i + ")" + c.getColumnName(i) + ":" + c.getString(i));
-//                	}
 	    	    	calDto.set_id(c.getString(c.getColumnIndex(Calendars._ID)));
 	    	    	localCalDtoList.add(calDto);
 	    	    } while (c.moveToNext());
@@ -500,7 +493,6 @@ public class ShowEventListActivity extends Activity {
 		 * 戻り値は、新規作成されたカレンダーのlocalCalDtoListにおける要素番号。
 		 */
 	    int createNewCalendar(String calendarName, String displayName, int color, String timezone) {
-	        Log.v("createNewCalendar()", "createNewCalendar() here.");
 		    ContentResolver contentResolver = getContentResolver();
 		    ContentValues calVal = new ContentValues();
 		    String result = null;
@@ -534,7 +526,6 @@ public class ShowEventListActivity extends Activity {
 		    strId = result.replaceAll(getCalProvider().toString() + "/", "");
 		    int index = strId.lastIndexOf('?');
 		    strId = index < 0 ? strId : strId.substring(0, index);
-		    Log.v("createNewCalendar()", "result --> strId: " + strId);
 
 		    localCalDtoList.clear(); // localCalDtoList をリフレッシュする
 		    queryClass.getCalendars();
@@ -558,7 +549,6 @@ public class ShowEventListActivity extends Activity {
 		void delCalendar() {
 			String delTargetIdStr = localCalDtoList.get(localTargetCal_ChosenPosition).get_id();
 			String delTargetDispName = localCalDtoList.get(localTargetCal_ChosenPosition).getCalendar_displayName();
-			Log.v("delCalendar()", "delCalendar() here. (Target _id:" + delTargetIdStr + ")");
 			ContentResolver cr = getContentResolver();
 			Uri calUri = ContentUris.withAppendedId(asSyncAdapter(getCalProvider(), appName, packageName), Long.parseLong(delTargetIdStr));
 			cr.delete(calUri, null, null);
@@ -657,12 +647,10 @@ public class ShowEventListActivity extends Activity {
 				String uid = event.getUid().getValue();
 				// EventsProviderから、EventのUIDがICS側のuidと一致するデータだけを抽出する為に、SQL文の条件を組み立てる
 	    	    if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-	        		Log.v("compareToCalendarProvider", "ICE_CREAM_SANDWICH");
 	        		selectionArgs = new String[] { uid };
 	            	selection = "(" + CalendarContract.Events.SYNC_DATA1 + " = ?)";
 	            } else { // API 14未満の場合、URLに含まれているuidと比較する為に必要部分を切り出してlike句で%検索する。
 	        		selectionArgs = new String[] { "%/" + uid.split("@")[0] };
-	        		Log.v("compareToCalendarProvider", "lower ICE_CREAM_SANDWICH / selectionArgs[0]: " + selectionArgs[0]);
 	            	selection = "( _sync_id like ? ) ";
 	            }
 	            cursor = getContentResolver().query(getEventProvider(), null, selection, selectionArgs, null);

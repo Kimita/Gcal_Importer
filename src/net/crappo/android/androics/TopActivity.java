@@ -45,8 +45,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.res.Resources;
 
 public class TopActivity extends Activity {
-
-	private static final String TAG = "TopActivity";
 	private static final int WC = ViewGroup.LayoutParams.WRAP_CONTENT;
 	private static final int RL_PADDING_TOP = 5;
 	private static final int RL_PADDING_BOTTOM = 10;
@@ -126,7 +124,6 @@ public class TopActivity extends Activity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-		Log.i("onOptionsItemSelected","onOptionsItemSelected here.");
     	switch (item.getItemId()) {
     	case R.id.top_menu_get_from_google: // Google CalendarからICSファイル(icalzip)を取得するケースで呼ばれる
 			Intent intent = new Intent(this, BrowserForDownLoadActivity.class);
@@ -142,32 +139,25 @@ public class TopActivity extends Activity {
 
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-		Log.v(TAG, "onActivityResult here.");
 	    if(requestCode == REQ_CODE_BROWSER){
 		    if(resultCode == RESULT_OK) { // アプリ内ブラウザを使ってGoogle CalendarからICSファイル取得に成功した場合
 		    	Toast.makeText(this, R.string.top_toast_download_comp, Toast.LENGTH_LONG).show();
 		    	if (zipTool.extractDownloadedZip(data.getExtras().getString("fileName"))) { // zip展開成功の場合
 			    	Toast.makeText(this, R.string.top_toast_extract_success, Toast.LENGTH_LONG).show();
-			    	Log.v(TAG, "Extract Success!");
 					btNext.setEnabled(false); // この後リフレッシュされるListViewから対象を選択するまでは、ボタンをunableにする。
 					pathArray = getListFilesOfDir(pathOfExtractedDir).toArray(new String[0]);
 					loadCompleted = false; // ICSファイル→ListViewの読み込み状態フラグをfalseにしておく
 					new TopIcsListAsync(activityObj).execute(pathArray); // ListViewをリフレッシュする
-					Log.v("onActivityResult", "onActivityResult Finished.");
 		    	} else { // zip展開失敗の場合は、その旨をToast表示
 			    	Toast.makeText(this, R.string.top_toast_extract_failuer, Toast.LENGTH_LONG).show();
-			    	Log.v(TAG, "Oops! Extract Failure.");
 		    	}
 		    } else { // ICSファイル取得に失敗した場合、その旨をToast表示
 		    	Toast.makeText(this, R.string.top_toast_download_failuer, Toast.LENGTH_LONG).show();
-		    	Log.v(TAG, "Oops! Download Failure.");
 		    }
 	    } else if(requestCode == REQ_CODE_FILE_PICKER) { // FilePicker(API 19から実装された)呼び出しの戻り処理
 		    if(resultCode == RESULT_OK) {
 		    	Uri targetFileUri = data.getData(); // FilePickerが返すIntentから、ファイルのUriオブジェクトを取得
 		    	String toPath = pathOfExtractedDir + new File(targetFileUri.getPath()).getName(); // ファイルのコピー先を決定
-		    	Log.v("onActivityResult", "toPath: " + toPath);
-		    	Log.v("onActivityResult", "targetFileUri.getPath()" + targetFileUri.getPath());
 		    	if(toPath.equals(targetFileUri.getPath())) { // ユーザの選択したファイルがコピー先と同一でないことを確認
 		    		Toast.makeText(this, R.string.top_toast_under_management, Toast.LENGTH_LONG).show();
 		    	} else { // 問題が無ければコピーメソッドを実行
@@ -242,7 +232,6 @@ public class TopActivity extends Activity {
 //						Toast.makeText(TopActivity.this, "Chosen File: " + m_chosen, Toast.LENGTH_LONG).show();
 						copyToExtractedDir(uri, toPath); // 選択されたファイルをUriオブジェクトで、コピー先のpathをStringで渡す
 					} else {
-						Log.v("pickerIcsFile", "chosenFile: " + m_chosen);
 						Toast.makeText(TopActivity.this, R.string.top_toast_picker_badchoice + m_chosen, Toast.LENGTH_LONG).show();
 					}
 				}
@@ -265,7 +254,6 @@ public class TopActivity extends Activity {
 	 * ユーザが選択したローカルICSファイルを、本アプリの管理下に取り込む(所定のディレクトリにコピーする)。
 	 */
 	private void copyToExtractedDir(Uri fromFUri, String toPath) {
-    	Log.v("copyToExtractedDir", "fromUri:" + fromFUri.getPath() + " / toPath:" + toPath);
     	// pathOfExtractedDir 配下へコピーする。
 		InputStream in = null;
 		try {
@@ -280,7 +268,6 @@ public class TopActivity extends Activity {
 			while((buff = br.readLine()) != null)	bw.write(buff + "\r\n");
 			br.close();
 			bw.close();
-	    	Log.v("copyToExtractedDir", "Copy Success!");
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
@@ -302,14 +289,12 @@ public class TopActivity extends Activity {
 	public void refreshListView(String[] pathArray){
 		if(pathArray.length == 0) {
 			Toast.makeText(this, R.string.top_toast_load_no_files, Toast.LENGTH_LONG).show();
-			Log.v("refreshListView", "refreshListView(): There is No ICS files.");
 			pathArray = new String[]{""};
 		}
 
 		adapter = new ViewHolderAdapter(this, 0, pathArray);
 		lv.setAdapter(adapter);
 		lv.setOnItemClickListener(new ItemOnClick());
-		Log.v("refreshListView", "refreshListView(): Finished.");
 	}
 
 	/* [読み込む]ボタンと[次へ]ボタンの、タップされた時の処理 */
@@ -322,10 +307,8 @@ public class TopActivity extends Activity {
 				btNext.setEnabled(false);
 				pathArray = getListFilesOfDir(pathOfExtractedDir).toArray(new String[0]);
 				new TopIcsListAsync(activityObj).execute(pathArray);
-				Log.v("ButtonClickListener", "BTN_LOAD Clicked.");
 				break;
 			case BTN_NEXT: // [次へ]ボタンが押されたら、選択されているICSファイルの情報を次のActivityへ渡す。
-				Log.v("ButtonClickListener", "BTN_NEXT Clicked. - selected: " + selectedFilePath);
 				intent = new Intent(TopActivity.this, ShowEventListActivity.class);
 				intent.putExtra("SELECTED_FILE_PATH", selectedFilePath);
 				startActivity(intent);
@@ -341,7 +324,6 @@ public class TopActivity extends Activity {
 			selectedFilePath = ((ListView)parent).getAdapter().getItem(position).toString();
 			clearBackgroundColor(parent); // ListViewの持つ全子要素の背景色をクリアする
 			v.setBackgroundColor(0xffbbbbbb); // 選択された子要素の背景だけ、指定の色にする
-			Log.v("itemOnClick", "filePath: " + selectedFilePath);
 			if(!selectedFilePath.equals(""))	btNext.setEnabled(true); // [次へ]ボタンを有効にする
 		}
 
@@ -393,7 +375,6 @@ public class TopActivity extends Activity {
 		}
         @Override
 	      public View getView(int position, View convertView, ViewGroup parent) {
-        	Log.v("ViewHolderAdapter", "getView(): position: " + position);
         	// 下記のif文はArrayAdapterにおけるconvertView使い回しの常套句のようなものだと思われる。
         	if (convertView == null) { // 自前のlayoutをconvertViewにsetする
         		holder = new ViewHolder(activityObj);
@@ -404,7 +385,6 @@ public class TopActivity extends Activity {
         	}
 
         	File fileObj = new File((String)getItem(position));
-        	Log.v("ViewHolderAdapter", "fileObj.getPath(): " + fileObj.getPath());
         	if(fileObj.getPath() == null || fileObj.getPath().equals("") ) { // ICSデータへのpathが空の場合
             	for (TextView entry : holder.tvArray) { // Dummyデータをsetする
             		switch(entry.getId()){
@@ -452,83 +432,6 @@ public class TopActivity extends Activity {
 //	sbTabs = new StringBuilder();
 //	showChild(parent, sbTabs);
 //	Log.v("itemOnClick", "showChild(parent, sbTabs): " + sbTabs);
-//
-//	/*
-//	 * for Debug
-//	 * Colorsクラスの持ってるフィールドをContentResolver経由で全部表示するだけの確認メソッド。
-//	 */
-//	private void getColors() {
-//		Log.v("Color.rgb(0, 0, 0)", Integer.valueOf(Color.rgb(0, 0, 0)).toString());
-//        if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1) {
-//        	Uri uri = CalendarContract.Colors.CONTENT_URI;
-//    		Log.v("Colors URI", uri.toString());
-//    		Cursor c = getContentResolver().query(uri, null, null, null, null);
-//        	int position;
-//        	if (c.moveToFirst()) {
-//        	    do {
-//            		position = c.getPosition();
-//        	    	for(int i=0;i<c.getColumnCount();i++) {
-//                		Log.v("getColors()[" + position + "]" , "(" + i + ")" + c.getColumnName(i) + ":" + c.getString(i));
-//                	}
-//        	    } while (c.moveToNext());
-//        	}
-//            c.close();
-//        }
-//	}
-//
-//	/*
-//	 * for Debug
-//	 * カレンダーProviderから個々のカレンダーを取得してLogに出力するだけの確認メソッド。
-//	 */
-//	private void getCalendars() {
-//		Cursor c = null;
-//    	c = getContentResolver().query(getCalProvider(), null, null, null, null);
-//    	int position;
-//    	if (c.moveToFirst()) {
-//    	    do {
-//        		position = c.getPosition();
-//    	    	for(int i=0;i<c.getColumnCount();i++) {
-//            		Log.v("getCalendars()[" + position + "]" , "(" + i + ")" + c.getColumnName(i) + ":" + c.getString(i));
-//            	}
-//    	    } while (c.moveToNext());
-//    	}
-//        c.close();
-//	}
-//	/* API 4.0からContentProviderのURI取得方法が刷新されたので、それに合わせたURIを返すメソッド */
-//	private Uri getCalProvider() {
-//        if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-//        	return Calendars.CONTENT_URI;
-//        } else {
-//        	return Uri.parse("content://com.android.calendar/calendars");
-//        }
-//	}
-//
-//	/*
-//	 * for Debug
-//	 * EventProviderから個々のイベントを取得してLogに出力するだけの確認メソッド。
-//	 */
-//    private void getEvents() {
-//            Cursor cursor = null;
-//            cursor = getContentResolver().query(getEventProvider(), null, null, null, null);
-////            cursor = getContentResolver().query(getEventProvider(), null, " (ownerAccount like ?) ", new String[]{"okirock77%"}, null);
-//
-//            if(cursor.moveToFirst()) {
-//                do {
-//                	int position = cursor.getPosition();
-//                	for(int i=0;i<cursor.getColumnCount();i++) {
-//                		Log.v("getEvents:" + position, "(" + i + ")" + cursor.getColumnName(i) + ":" + cursor.getString(i));
-//                	}
-//                } while (cursor.moveToNext());
-//            }
-//            cursor.close();
-//    }
-//	private Uri getEventProvider() {
-//        if(android.os.Build.VERSION.SDK_INT > android.os.Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-//        	return CalendarContract.Events.CONTENT_URI;
-//        } else {
-//        	return Uri.parse("content://com.android.calendar/events");
-//        }
-//	}
 //
 
 }
