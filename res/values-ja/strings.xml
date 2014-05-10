@@ -38,7 +38,7 @@
 	<string name="filechooser_button3">Folder Choose</string>
 
     <!-- for ShowEventListActivity -->
-    <string name="title_activity_show_event_list">ShowEventListActivity</string>
+    <string name="title_activity_show_event_list">ShowEventList</string>
     <string name="showeventlist_notset">Not set</string>
     <string name="showeventlist_trtitle_filename">File Name</string>
     <string name="showeventlist_trtitle_calid">Calendar ID</string>
@@ -62,9 +62,9 @@
     <string name="showeventlist_done_calendar_delete">以下のカレンダーが削除されました</string>
     <string name="showeventlist_nothing_for_insert">取り込むべきイベントがありません</string>
     <string name="showeventlist_import_now">Importしています\n普段使っているカレンダーアプリで結果を確認して下さい</string>
-    <string name="showeventlist_tv_exist_ics">ICS data :</string>
-    <string name="showeventlist_tv_exist_local">Both data:</string>
-    <string name="showeventlist_tv_exist_ics_only">ICS Only :</string>
+    <string name="showeventlist_tv_exist_ics">ICSデータ件数:</string>
+    <string name="showeventlist_tv_exist_local">取込済み件数:</string>
+    <string name="showeventlist_tv_exist_ics_only">未取込の件数 :</string>
 
 	<string name="showeventlist_menu_del_calendar">削除するカレンダーを選択</string>
 	<string name="showeventlist_menu_create_new_calendar">import先を新規作成</string>

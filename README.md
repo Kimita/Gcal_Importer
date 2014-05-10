@@ -29,13 +29,13 @@ If you want to build this application, it is necessary to get the groovy-2.2.2-i
 ----------------------------------------------------------------------
 
 【ビルド時の注意点】
-ical4j-1.0.5の配布物に同梱されているライブラリ(jarファイル)には下記があります。
-・backport-util-concurrent-3.1.jar
-・commons-codec-1.8.jar
-・commons-lang-2.6.jar
-・commons-logging-1.1.3.jar
-・groovy-all-2.1.1.jar   <-- ここに注意
-・ical4j-1.0.5.jar
+ical4j-1.0.5の配布物に同梱されているライブラリ(jarファイル)には下記があります。　
+　* backport-util-concurrent-3.1.jar 
+ * commons-codec-1.8.jar 
+ * commons-lang-2.6.jar 
+ * commons-logging-1.1.3.jar 
+ * groovy-all-2.1.1.jar   <-- ここに注意 
+ * ical4j-1.0.5.jar 
 
 これらのうち、作者の開発環境(Eclipse with ADT)ではical4j同梱のgroovy-allを使うとAPKビルド時にけたたましくwarningが出てビルド完了前にEclipseがメモリ不足で落ちたりと酷いことになった。
 調べたところ、下記の情報源などから「indyを有効にしてるgroovyだったらどうだろう？」と考えた。

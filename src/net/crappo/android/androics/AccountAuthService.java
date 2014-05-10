@@ -10,16 +10,16 @@ import android.os.IBinder;
  * これがあることでAndroidのアカウント管理からアカウントを作成することもできる。
  */
 public class AccountAuthService extends Service {
-	private AndroIcsAuthenticator andAuthenticator = null;
+    private AndroIcsAuthenticator andAuthenticator = null;
 
-	@Override
-	public void onCreate() {
-		super.onCreate();
-		andAuthenticator = new AndroIcsAuthenticator(this);
-	}
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        andAuthenticator = new AndroIcsAuthenticator(this);
+    }
 
-	@Override
-	public IBinder onBind(Intent intent) {
-		return andAuthenticator.getIBinder();
-	}
+    @Override
+    public IBinder onBind(Intent intent) {
+        return andAuthenticator.getIBinder();
+    }
 }

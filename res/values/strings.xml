@@ -38,7 +38,7 @@
 	<string name="filechooser_button3">Folder Choose</string>
 
     <!-- for ShowEventListActivity -->
-    <string name="title_activity_show_event_list">ShowEventListActivity</string>
+    <string name="title_activity_show_event_list">ShowEventList</string>
     <string name="showeventlist_notset">Not set</string>
     <string name="showeventlist_trtitle_filename">File Name</string>
     <string name="showeventlist_trtitle_calid">Calendar ID</string>
@@ -63,8 +63,8 @@
     <string name="showeventlist_nothing_for_insert">Nothing for insert.</string>
     <string name="showeventlist_import_now">Import now.\nPlease show and check your calendar application.</string>
     <string name="showeventlist_tv_exist_ics">ICS data:</string>
-    <string name="showeventlist_tv_exist_local">Both data:</string>
-    <string name="showeventlist_tv_exist_ics_only">ICS Only:</string>
+    <string name="showeventlist_tv_exist_local">Local Exist:</string>
+    <string name="showeventlist_tv_exist_ics_only">Local None:</string>
 
 	<string name="showeventlist_menu_del_calendar">Delete calendar</string>
 	<string name="showeventlist_menu_create_new_calendar">Create new calendar</string>
