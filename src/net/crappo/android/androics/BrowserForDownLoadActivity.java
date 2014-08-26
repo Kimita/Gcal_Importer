@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.StringTokenizer;
 
 import org.apache.http.Header;
 import org.apache.http.HttpResponse;
@@ -180,7 +181,8 @@ public class BrowserForDownLoadActivity extends Activity {
                             if(name.equals("Content-disposition")) {
                                 str = val.split(";");
                                 str = str[1].split("=");
-                                obtainedName = str[1];
+                                StringTokenizer st = new StringTokenizer(str[1],"\"");
+                                obtainedName = st.nextToken();
                             }
                         }
 

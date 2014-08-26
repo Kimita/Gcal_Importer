@@ -5,6 +5,6 @@
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.ANDROID_FRAMEWORK"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.LIBRARIES"/>
 	<classpathentry exported="true" kind="con" path="com.android.ide.eclipse.adt.DEPENDENCIES"/>
-	<classpathentry kind="lib" path="/groovy-2.2.2/indy/groovy-2.2.2-indy.jar"/>
+	<classpathentry kind="lib" path="/groovy-2.3.6/indy/groovy-2.3.6-indy.jar"/>
 	<classpathentry kind="output" path="bin/classes"/>
 </classpath>
